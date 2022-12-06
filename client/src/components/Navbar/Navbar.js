@@ -1,94 +1,79 @@
-import { AppBar, Avatar, Typography, Toolbar, Button } from "@material-ui/core";
-import useStyles from "./styles";
 import memories from "../../images/memories.png";
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useLocation} from "react-router-dom";
-import {useNavigate} from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import decode from "jwt-decode";
 
 const Navbar = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [user,setUser] =useState(JSON.parse(localStorage.getItem("profile")));
-  
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+
   const logout = () => {
-    dispatch({type:"LOGOUT"});
+    dispatch({ type: "LOGOUT" });
     navigate("/");
     setUser(null);
-  }
+  };
 
   useEffect(() => {
     const token = user?.token;
-    
-    if(token) {
+
+    if (token) {
       const decodedToken = decode(token);
       if (decodedToken.exp * 1000 < new Date().getTime()) {
         logout();
       }
     }
 
-
-    setUser(JSON.parse(localStorage.getItem("profile")))
-  },[location])
-
+    setUser(JSON.parse(localStorage.getItem("profile")));
+  }, [location]);
 
   return (
-    <AppBar className={classes.appBar} position="static" color="inherit">
-      <div className={classes.brandContainer}>
-        <Typography
-          component={Link}
-          to="/"
-          className={classes.heading}
-          variant="h2"
-          align="center"
-        >
-          Memories
-        </Typography>
-        <img
-          className={classes.image}
-          src={memories}
-          alt="memories"
-          height="60"
-        />
-      </div>
-      <Toolbar className={classes.toolbar}>
+    <nav className="navbar navbar-light bg-light mb-4 py-4">
+      <div className="container-fluid">
+        <div className="col-9">
+          <a className="navbar-brand h1 mx-4" href="/">
+            Memories
+            <img
+              src={memories}
+              alt="Memories"
+              width="120"
+              height="80"
+              className="d-inline-block align-text-top mx-4"
+            ></img>
+          </a>
+        </div>
         {user ? (
-          <div className={classes.profile}>
-            <Avatar
-              className={classes.purple}
-              alt={user?.result.name}
-              src={user?.result.imageUrl}
-            >
-              {user?.result.name.charAt(0)}
-            </Avatar>
-            <Typography className={classes.userName} variant="h6">
-              {user?.result.name}
-            </Typography>
-            <Button
-              variant="contained"
-              className={classes.logout}
-              color="secondary"
-              onClick={logout}
-            >
+          <div className="col-3 d-flex justify-content-end">
+            {user.result.imageUrl ? (
+              <div className="mx-2 align-self-center">
+                <img alt={user?.result.name} src={user?.result.imageUrl}></img>
+              </div>
+            ) : (
+              <div className="mx-2 align-self-center">
+                <h1>{user?.result.name.charAt(0)}</h1>
+              </div>
+            )}
+            <h6 className="mx-2 align-self-center mb-0">
+              {" "}
+              {user?.result.name}{" "}
+            </h6>
+            <button className="btn btn-dark mx-4" onClick={logout}>
               Logout
-            </Button>
+            </button>
           </div>
         ) : (
-          <Button
-            component={Link}
-            to="/auth"
-            variant="contained"
-            color="primary"
-          >
-            Sign in
-          </Button>
+          <div>
+            <a href="/auth" className="btn btn-dark mx-4">
+              Sign in
+            </a>
+          </div>
         )}
-      </Toolbar>
-    </AppBar>
+      </div>
+    </nav>
   );
 };
 

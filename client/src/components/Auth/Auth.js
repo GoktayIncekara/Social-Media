@@ -9,15 +9,14 @@ import {
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import jwt_decode from "jwt-decode";
-import {useDispatch} from "react-redux";
-import {useNavigate} from "react-router-dom";
-import {signin, signup} from "../../actions/auth";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { signin, signup } from "../../actions/auth";
 
 import useStyles from "./styles";
 import Input from "./Input";
 
 const Auth = () => {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -29,9 +28,8 @@ const Auth = () => {
     document.getElementById("signInDiv").hidden = true;
 
     try {
-      dispatch({type: "AUTH", data: {userObject, token}});
+      dispatch({ type: "AUTH", data: { userObject, token } });
       navigate("/");
-
     } catch (error) {
       console.log(error);
     }
@@ -44,16 +42,23 @@ const Auth = () => {
   useEffect(() => {
     /* global google */
     google.accounts.id.initialize({
-      client_id: "792913670363-i5g3ieh6kfovjobbtuqbqttvoalstkat.apps.googleusercontent.com",
-      callback: handleCallbackResponse
+      client_id:
+        "792913670363-i5g3ieh6kfovjobbtuqbqttvoalstkat.apps.googleusercontent.com",
+      callback: handleCallbackResponse,
     });
-    google.accounts.id.renderButton(
-      document.getElementById("signInDiv"),
-      {theme: "outline", size:"large"}
-    )
-  },[])
+    google.accounts.id.renderButton(document.getElementById("signInDiv"), {
+      theme: "outline",
+      size: "large",
+    });
+  }, []);
 
-  const initialState = {firstName: "", lastName: "", email:"", password:"",confirmPassword:""};
+  const initialState = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  };
 
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
@@ -70,7 +75,7 @@ const Auth = () => {
   };
 
   const handleChange = (e) => {
-    setFormData({...formData, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleShowPassword = () => {
@@ -142,12 +147,13 @@ const Auth = () => {
             {isSignup ? "Sign Up" : "Sign In"}
           </Button>
 
-          <div className={classes.googleButton}
-                color="primary"
-                variant="contained"
-                id="signInDiv">
-          </div>
-  
+          <div
+            className={classes.googleButton}
+            color="primary"
+            variant="contained"
+            id="signInDiv"
+          ></div>
+
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Button onClick={switchMode}>
