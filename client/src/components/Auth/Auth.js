@@ -1,20 +1,9 @@
 import React, { useEffect, useState } from "react";
-import {
-  Avatar,
-  Button,
-  Paper,
-  Grid,
-  Typography,
-  Container,
-} from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import jwt_decode from "jwt-decode";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { signin, signup } from "../../actions/auth";
-
-import useStyles from "./styles";
-import Input from "./Input";
 
 const Auth = () => {
   const dispatch = useDispatch();
@@ -60,7 +49,6 @@ const Auth = () => {
     confirmPassword: "",
   };
 
-  const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
   const [formData, setFormData] = useState(initialState);
@@ -78,9 +66,11 @@ const Auth = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  /*
   const handleShowPassword = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
+  */
 
   const switchMode = () => {
     setIsSignup((prevIsSignup) => !prevIsSignup);
@@ -88,84 +78,80 @@ const Auth = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <Paper className={classes.paper} elevation={3}>
-        <Avatar className={classes.avatar}>
+    <div className="bg-white px-3 pt-3 pb-1">
+      <div className="row">
+        <div className="col-12">
           <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          {isSignup ? "Sign up" : "Sign in"}
-        </Typography>
-        <form className={classes.form} onSubmit={handleSubmit}>
-          <Grid container spacing={2}>
-            {isSignup && (
-              <>
-                <Input
-                  name="firstName"
-                  label="First Name"
-                  handleChange={handleChange}
-                  autoFocus
-                  half
-                />
-                <Input
-                  name="lastName"
-                  label="Last Name"
-                  handleChange={handleChange}
-                  half
-                />
-              </>
-            )}
-            <Input
-              name="email"
-              label="Email Address"
-              handleChange={handleChange}
-              type="email"
-            />
-            <Input
-              name="password"
-              label="Password"
-              handleChange={handleChange}
-              type={showPassword ? "text" : "password"}
-              handleShowPassword={handleShowPassword}
-            />
-            {isSignup && (
-              <Input
-                name="confirmPassword"
-                label="Repeat Password"
-                handleChange={handleChange}
-                type="password"
+        </div>
+        <div className="col-12 mb-1">
+          <h1>{isSignup ? "Sign up" : "Sign in"}</h1>
+        </div>
+      </div>
+      <form autoComplete="off" noValidate onSubmit={handleSubmit}>
+        <div className="row">
+          <div className="col-12 mb-1">
+            <div className="form-group">
+              {isSignup && (
+                <>
+                  <input
+                    name="firstName"
+                    label="First Name"
+                    onChange={handleChange}
+                    autoFocus
+                  />
+                  <input
+                    name="lastName"
+                    label="Last Name"
+                    onChange={handleChange}
+                    half
+                  />
+                </>
+              )}
+            </div>
+          </div>
+          <div className="col-12 mb-3">
+            <div className="form-group">
+              <input
+                name="email"
+                label="Email Address"
+                onChange={handleChange}
+                type="email"
               />
-            )}
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
+            </div>
+          </div>
+          <div className="col-12 mb-3">
+            <div className="form-group">
+              <input
+                name="password"
+                label="Password"
+                onChange={handleChange}
+                type={showPassword ? "text" : "password"}
+              />
+            </div>
+          </div>
+          <div className="col-12 mb-3">
+            <div className="form-group">
+              {isSignup && (
+                <input
+                  label="Repeat Password"
+                  onChange={handleChange}
+                  type="password"
+                />
+              )}
+            </div>
+          </div>
+          <button type="submit" className="btn btn-dark">
             {isSignup ? "Sign Up" : "Sign In"}
-          </Button>
-
-          <div
-            className={classes.googleButton}
-            color="primary"
-            variant="contained"
-            id="signInDiv"
-          ></div>
-
-          <Grid container justifyContent="flex-end">
-            <Grid item>
-              <Button onClick={switchMode}>
-                {isSignup
-                  ? "Already have an account? Sign in"
-                  : "Don't have an account? Sign Up"}
-              </Button>
-            </Grid>
-          </Grid>
-        </form>
-      </Paper>
-    </Container>
+          </button>
+          <div id="signInDiv"></div>
+          <button onClick={switchMode}>
+            {isSignup
+              ? "Already have an account? Sign in"
+              : "Don't have an account? Sign Up"}
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 

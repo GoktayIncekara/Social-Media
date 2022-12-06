@@ -1,4 +1,4 @@
-import memories from "../../images/memories.png";
+import memories from "../../images/memories.jpg";
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
@@ -40,8 +40,8 @@ const Navbar = () => {
             <img
               src={memories}
               alt="Memories"
-              width="120"
-              height="80"
+              width="80"
+              height="50"
               className="d-inline-block align-text-top mx-4"
             ></img>
           </a>

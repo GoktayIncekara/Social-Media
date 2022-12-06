@@ -5,8 +5,8 @@ import { useSelector } from "react-redux";
 const Posts = ({ setCurrentId }) => {
   const posts = useSelector((state) => state.posts);
   return !posts.length ? (
-    <div className="spinner-border" role="status">
-      <span className="visually-hidden">Loading...</span>
+    <div class="spinner-border text-light" role="status">
+      <span class="visually-hidden">Loading...</span>
     </div>
   ) : (
     <div className="container">

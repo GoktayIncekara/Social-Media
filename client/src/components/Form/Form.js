@@ -50,7 +50,7 @@ const Form = ({ currentId, setCurrentId }) => {
 
   if (!user?.result?.name) {
     return (
-      <div className="bg-white">
+      <div className="bg-dark">
         <h6>
           Please Sign In to create your own memories and like other's memories.
         </h6>
@@ -59,11 +59,13 @@ const Form = ({ currentId, setCurrentId }) => {
   }
 
   return (
-    <div className="bg-white px-3 pt-3 pb-1">
+    <div className="bg-secondary px-3 pt-3 pb-1">
       <form autoComplete="off" noValidate onSubmit={handleSubmit}>
         <div className="row">
           <div className="col-12">
-            <h6>{currentId ? "Editing" : "Creating"} a Memory</h6>
+            <h6 className="text-white">
+              {currentId ? "Editing" : "Creating"} a Memory
+            </h6>
           </div>
           <div className="col-12 mb-1">
             <div className="form-group">
@@ -119,12 +121,12 @@ const Form = ({ currentId, setCurrentId }) => {
               }
             ></FileBase>
           </div>
-          <button className="btn btn-primary btn-block mb-2" type="submit">
+          <button className="btn btn-dark btn-block mb-2" type="submit">
             Submit
           </button>
           <button
             type="button"
-            className="btn btn-danger btn-block"
+            className="btn btn-light btn-block"
             onClick={clear}
           >
             Clear
