@@ -50,7 +50,7 @@ const Form = ({ currentId, setCurrentId }) => {
 
   if (!user?.result?.name) {
     return (
-      <div className="bg-dark">
+      <div className="bg-light">
         <h6>
           Please Sign In to create your own memories and like other's memories.
         </h6>

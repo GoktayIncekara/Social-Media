@@ -6,8 +6,8 @@ import { useDispatch } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import ChipInput from "material-ui-chip-input";
 
-import { getPosts } from "../../actions/posts";
-import { useEffect, useState } from "react";
+import { getPostsBySearch } from "../../actions/posts";
+import { useState } from "react";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -23,10 +23,6 @@ const Home = () => {
   const [search, setSearch] = useState("");
   const [tags, setTags] = useState([]);
 
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [currentId, dispatch]);
-
   const handleKeyPress = (e) => {
     if (e.key == "Enter") {
       searchPost();
@@ -38,8 +34,11 @@ const Home = () => {
     setTags(tags.filter((tag) => tag != tagToDelete));
 
   const searchPost = () => {
-    if (search.trim()) {
-      //dispatch -> fetch search post
+    if (search.trim() || tags) {
+      dispatch(getPostsBySearch({ search, tags: tags.join(",") }));
+      navigate(
+        `/posts/search?searchQuery=${search || "none"}&tags=${tags.join(",")}`
+      );
     } else {
       navigate("/");
     }
@@ -87,7 +86,7 @@ const Home = () => {
             </div>
           </div>
           <div className="bg-light mb-5">
-            <Paginate />
+            <Paginate page={page} />
           </div>
 
           <Form currentId={currentId} setCurrentId={setCurrentId} />

@@ -1,6 +1,5 @@
 body {
-    background-color: rgba(0,183,255, 1);
-    background-image: url("./images/background.webp");
+    background-color: #eaeaea;
 }
 
 .card-img-top {

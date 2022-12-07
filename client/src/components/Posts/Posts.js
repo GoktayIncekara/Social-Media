@@ -3,10 +3,10 @@ import Post from "./Post/Post";
 import { useSelector } from "react-redux";
 
 const Posts = ({ setCurrentId }) => {
-  const posts = useSelector((state) => state.posts);
-  return !posts.length ? (
-    <div class="spinner-border text-light" role="status">
-      <span class="visually-hidden">Loading...</span>
+  const { posts } = useSelector((state) => state.posts);
+  return !posts?.length ? (
+    <div className="spinner-border text-dark" role="status">
+      <span className="visually-hidden">Loading...</span>
     </div>
   ) : (
     <div className="container">

@@ -41,7 +41,7 @@ const Post = ({ post, setCurrentId }) => {
   };
 
   return (
-    <div className="card" style={{ width: "22rem" }}>
+    <div className="card shadow bg-body rounded" style={{ width: "22rem" }}>
       <img className="card-img-top" src={post.selectedFile} alt="Post"></img>
       <div className="card-img-overlay d-flex justify-content-between h-25">
         <div>
