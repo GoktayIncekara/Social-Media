@@ -110,14 +110,14 @@ const Post = ({ post, setCurrentId }) => {
         </button>
         {(user?.result?.googleId === post?.creator ||
           user?.result?._id === post?.creator) && (
-          <a
+          <button
             className="btn btn-dark mx-2"
             onClick={() => {
               dispatch(deletePost(post._id));
             }}
           >
             <DeleteIcon fontSize="small" /> &nbsp; Delete &nbsp;
-          </a>
+          </button>
         )}
       </div>
     </div>

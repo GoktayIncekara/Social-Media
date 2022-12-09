@@ -24,14 +24,14 @@ const Home = () => {
   const [tags, setTags] = useState([]);
 
   const handleKeyPress = (e) => {
-    if (e.key == "Enter") {
+    if (e.key === "Enter") {
       searchPost();
     }
   };
 
   const handleAdd = (tag) => setTags([...tags, tag]);
   const handleDelete = (tagToDelete) =>
-    setTags(tags.filter((tag) => tag != tagToDelete));
+    setTags(tags.filter((tag) => tag !== tagToDelete));
 
   const searchPost = () => {
     if (search.trim() || tags) {

@@ -13,11 +13,11 @@ const PostDetails = () => {
 
   useEffect(() => {
     dispatch(getPost(id));
-  }, [id]);
+  }, [id, dispatch]);
 
   useEffect(() => {
     dispatch(getPostsBySearch({ search: "none", tags: post?.tags.join(",") }));
-  }, [post]);
+  }, [post, dispatch]);
 
   if (!post) return null;
 
@@ -35,7 +35,7 @@ const PostDetails = () => {
 
   return (
     <div>
-      <div className="card shadow bg-body rounded mx-5 mb-4">
+      <div className="card shadow bg-body rounded mx-5 mb-5">
         <div className="row">
           <div className="col-4">
             <img

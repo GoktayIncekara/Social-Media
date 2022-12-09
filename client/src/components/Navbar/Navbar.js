@@ -37,7 +37,7 @@ const Navbar = () => {
       <div className="container-fluid">
         <div className="col-9">
           <a className="navbar-brand h1 mx-4" href="/">
-            <img src={memoriesText} width="200" height="50"></img>
+            <img src={memoriesText} width="200" height="50" alt="Logo"></img>
             <img
               src={memories}
               alt="Memories"

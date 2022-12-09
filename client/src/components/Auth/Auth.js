@@ -23,10 +23,11 @@ const Auth = () => {
       console.log(error);
     }
   }
-
+  /*
   function handleSignOut(event) {
     document.getElementById("signInDiv").hidden = false;
   }
+  */
 
   useEffect(() => {
     /* global google */
