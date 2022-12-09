@@ -52,11 +52,17 @@ const Auth = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
   const [formData, setFormData] = useState(initialState);
+  const [matched, setMatched] = useState(true);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isSignup) {
-      dispatch(signup(formData, navigate));
+      if (formData.confirmPassword === formData.password) {
+        setMatched(true);
+        dispatch(signup(formData, navigate));
+      } else {
+        setMatched(false);
+      }
     } else {
       dispatch(signin(formData, navigate));
     }
@@ -66,91 +72,118 @@ const Auth = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  /*
   const handleShowPassword = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
-  */
 
   const switchMode = () => {
     setIsSignup((prevIsSignup) => !prevIsSignup);
     setShowPassword(false);
+    setMatched(true);
   };
 
   return (
-    <div className="bg-white px-3 pt-3 pb-1">
-      <div className="row">
-        <div className="col-12">
-          <LockOutlinedIcon />
-        </div>
-        <div className="col-12 mb-1">
-          <h1>{isSignup ? "Sign up" : "Sign in"}</h1>
-        </div>
-      </div>
-      <form autoComplete="off" noValidate onSubmit={handleSubmit}>
-        <div className="row">
-          <div className="col-12 mb-1">
-            <div className="form-group">
-              {isSignup && (
-                <>
-                  <input
-                    name="firstName"
-                    label="First Name"
-                    onChange={handleChange}
-                    autoFocus
-                  />
-                  <input
-                    name="lastName"
-                    label="Last Name"
-                    onChange={handleChange}
-                    half
-                  />
-                </>
-              )}
+    <div className="row">
+      <div className="col-4"></div>
+
+      <div className="col-4">
+        <form className="bg-white p-4" onSubmit={handleSubmit}>
+          <div className="row">
+            <div className="col-12 d-flex justify-content-center mb-1">
+              <LockOutlinedIcon />
             </div>
-          </div>
-          <div className="col-12 mb-3">
-            <div className="form-group">
-              <input
-                name="email"
-                label="Email Address"
-                onChange={handleChange}
-                type="email"
-              />
+            <div className="col-12">
+              <legend className="text-center">
+                {isSignup ? "Sign up" : "Sign in"}
+              </legend>
             </div>
-          </div>
-          <div className="col-12 mb-3">
-            <div className="form-group">
-              <input
-                name="password"
-                label="Password"
-                onChange={handleChange}
-                type={showPassword ? "text" : "password"}
-              />
+            <div className="col-12 mb-3">
+              <div className="form-group">
+                {isSignup && (
+                  <>
+                    <input
+                      type="text"
+                      name="firstName"
+                      className="form-control mb-3"
+                      placeholder="First Name"
+                      onChange={handleChange}
+                      autoFocus
+                    />
+                    <input
+                      type="text"
+                      name="lastName"
+                      className="form-control"
+                      placeholder="Last Name"
+                      onChange={handleChange}
+                    />
+                  </>
+                )}
+              </div>
             </div>
-          </div>
-          <div className="col-12 mb-3">
-            <div className="form-group">
-              {isSignup && (
+            <div className="col-12 mb-3">
+              <div className="form-group">
                 <input
-                  label="Repeat Password"
+                  name="email"
+                  type="email"
+                  className="form-control"
+                  placeholder="Email"
                   onChange={handleChange}
-                  type="password"
                 />
-              )}
+              </div>
             </div>
+            <div className="col-12">
+              <div className="form-group">
+                <input
+                  name="password"
+                  className="form-control"
+                  placeholder="Password"
+                  onChange={handleChange}
+                  type={showPassword ? "text" : "password"}
+                />
+              </div>
+            </div>
+            <div className="col-12 my-3">
+              <div className="form-group">
+                {isSignup && (
+                  <input
+                    name="confirmPassword"
+                    className="form-control"
+                    placeholder="Confirm Password"
+                    onChange={handleChange}
+                    type={showPassword ? "text" : "password"}
+                  />
+                )}
+              </div>
+            </div>
+            <div className="mb-3 form-check mx-3">
+              <input
+                type="checkbox"
+                className="form-check-input"
+                onClick={handleShowPassword}
+              />
+              <label className="form-check-label">Show Password</label>
+            </div>
+            <button type="submit" className="btn btn-dark mb-3">
+              {isSignup ? "Sign Up" : "Sign In"}
+            </button>
+            <div>
+              <h1>{!matched && "Passwords do not match!"}</h1>
+            </div>
+            <button
+              type="button"
+              className="btn btn-danger mb-3"
+              onClick={switchMode}
+            >
+              {isSignup
+                ? "Already have an account? Sign in"
+                : "Don't have an account? Sign Up"}
+            </button>
+            <div id="signInDiv"></div>
           </div>
-          <button type="submit" className="btn btn-dark">
-            {isSignup ? "Sign Up" : "Sign In"}
-          </button>
-          <div id="signInDiv"></div>
-          <button onClick={switchMode}>
-            {isSignup
-              ? "Already have an account? Sign in"
-              : "Don't have an account? Sign Up"}
-          </button>
-        </div>
-      </form>
+        </form>
+      </div>
+
+      <div className="col-4"></div>
     </div>
   );
 };

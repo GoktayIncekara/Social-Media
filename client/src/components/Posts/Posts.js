@@ -3,8 +3,11 @@ import Post from "./Post/Post";
 import { useSelector } from "react-redux";
 
 const Posts = ({ setCurrentId }) => {
-  const { posts } = useSelector((state) => state.posts);
-  return !posts?.length ? (
+  const { posts, isLoading } = useSelector((state) => state.posts);
+
+  if (!posts.length && !isLoading) return "No posts";
+
+  return isLoading ? (
     <div className="spinner-border text-dark" role="status">
       <span className="visually-hidden">Loading...</span>
     </div>

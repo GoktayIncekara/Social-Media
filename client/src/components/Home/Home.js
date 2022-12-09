@@ -85,9 +85,11 @@ const Home = () => {
               </button>
             </div>
           </div>
-          <div className="bg-light mb-5">
-            <Paginate page={page} />
-          </div>
+          {!searchQuery && !tags.length && (
+            <div className="bg-light mb-5">
+              <Paginate page={page} />
+            </div>
+          )}
 
           <Form currentId={currentId} setCurrentId={setCurrentId} />
         </div>
