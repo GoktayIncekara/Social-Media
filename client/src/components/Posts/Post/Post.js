@@ -15,7 +15,7 @@ const Post = ({ post, setCurrentId }) => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const [likes, setLikes] = useState(post?.likes);
 
-  const userId = user?.result.googleId || user?.result._id;
+  const userId = user?.userObject._id;
   const hasLikedPost = post.likes.find((like) => like === userId);
 
   const handleLike = async () => {
@@ -77,8 +77,7 @@ const Post = ({ post, setCurrentId }) => {
           </p>
         </div>
         <div>
-          {(user?.result?.googleId === post?.creator ||
-            user?.result?._id === post?.creator) && (
+          {user?.userObject?._id === post?.creator && (
             <button
               type="button"
               className="btn btn-dark"
@@ -97,19 +96,22 @@ const Post = ({ post, setCurrentId }) => {
           <h6 className="card-subtitle mb-2 text-muted">
             {post.tags.map((tag) => `#${tag} `)}
           </h6>
+          <h1>USER ID</h1>
+          <h1>{user?.userObject._id}</h1>
+          <h1>POST ID</h1>
+          <h1>{post?.creator}</h1>
           <h5>{post.title}</h5>
-          <p className="card-text">{post.message}</p>
+          <p className="card-text mb-2">{post.message}</p>
         </div>
         <button
           type="button"
           className="btn btn-dark"
-          disabled={!user?.result}
+          disabled={!user?.userObject}
           onClick={handleLike}
         >
           <Likes />
         </button>
-        {(user?.result?.googleId === post?.creator ||
-          user?.result?._id === post?.creator) && (
+        {user?.userObject?._id === post?.creator && (
           <button
             className="btn btn-dark mx-2"
             onClick={() => {

@@ -32,10 +32,13 @@ const Form = ({ currentId, setCurrentId }) => {
 
     if (currentId) {
       dispatch(
-        updatePost(currentId, { ...postData, name: user?.result?.name })
+        updatePost(currentId, { ...postData, name: user?.userObject?.name })
       );
     } else {
-      dispatch(createPost({ ...postData, name: user?.result?.name }, navigate));
+      console.log(postData);
+      dispatch(
+        createPost({ ...postData, name: user?.userObject?.name }, navigate)
+      );
     }
     clear();
   };
@@ -50,18 +53,25 @@ const Form = ({ currentId, setCurrentId }) => {
     });
   };
 
-  if (!user?.result?.name) {
+  if (!user?.userObject?.name) {
     return (
-      <div className="bg-light">
-        <h6>
-          Please Sign In to create your own memories and like other's memories.
-        </h6>
+      <div>
+        <a
+          href="/auth"
+          className="link-danger text-center"
+          style={{ textDecoration: "none" }}
+        >
+          <h2>
+            Please <strong>Sign In</strong> to create your own memories and like
+            other's memories.
+          </h2>
+        </a>
       </div>
     );
   }
 
   return (
-    <div className="bg-secondary px-3 pt-3 pb-1">
+    <div className="bg-secondary p-3 pb-1 mt-3">
       <form autoComplete="off" noValidate onSubmit={handleSubmit}>
         <div className="row">
           <div className="col-12">

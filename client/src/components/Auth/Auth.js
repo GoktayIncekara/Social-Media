@@ -13,6 +13,7 @@ const Auth = () => {
     //console.log("Encoded JWT ID token: " + response.credential);
     var token = response.credential;
     var userObject = jwt_decode(response.credential);
+    //userObject = { ...userObject, _id: "123456" };
 
     document.getElementById("signInDiv").hidden = true;
 

@@ -49,18 +49,21 @@ const Navbar = () => {
         </div>
         {user ? (
           <div className="col-3 d-flex justify-content-end">
-            {user.result.imageUrl ? (
+            {user.userObject.picture ? (
               <div className="mx-2 align-self-center">
-                <img alt={user?.result.name} src={user?.result.imageUrl}></img>
+                <img
+                  alt={user?.userObject.name}
+                  src={user?.userObject.picture}
+                ></img>
               </div>
             ) : (
               <div className="mx-2 align-self-center">
-                <h1>{user?.result.name.charAt(0)}</h1>
+                <h1>{user?.userObject.name.charAt(0)}</h1>
               </div>
             )}
             <h6 className="mx-2 align-self-center mb-0">
               {" "}
-              {user?.result.name}{" "}
+              {user?.userObject.name}{" "}
             </h6>
             <button className="btn btn-dark mx-4" onClick={logout}>
               Logout

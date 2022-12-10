@@ -9,7 +9,7 @@ const CommentSection = ({ post }) => {
   const dispatch = useDispatch();
 
   const handleClick = async () => {
-    const finalComment = `${user.result.name}: ${comment}`;
+    const finalComment = `${user.userObject.name}: ${comment}`;
     const newComments = await dispatch(commentPost(finalComment, post._id));
     setComments(newComments);
     setComment("");
@@ -18,7 +18,7 @@ const CommentSection = ({ post }) => {
   return (
     <div>
       <div className="row mx-5 mt-3 d-flex justify-content-between">
-        {user?.result.name && (
+        {user?.userObject.name && (
           <div>
             <h1>Write a comment</h1>
             <input
