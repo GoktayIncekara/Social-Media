@@ -34,7 +34,9 @@ const Home = () => {
     setTags(tags.filter((tag) => tag !== tagToDelete));
 
   const searchPost = () => {
-    if (search.trim() || tags) {
+    if (search.trim() === "" || tags === []) {
+      navigate("/");
+    } else if (search.trim() || tags) {
       dispatch(getPostsBySearch({ search, tags: tags.join(",") }));
       navigate(
         `/posts/search?searchQuery=${search || "none"}&tags=${tags.join(",")}`
@@ -47,10 +49,7 @@ const Home = () => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-8">
-          <Posts setCurrentId={setCurrentId} />
-        </div>
-        <div className="col-4">
+        <div className="col-lg-4">
           <div className="bg-dark p-3">
             <div className="col-12 mb-2">
               <h3 className="text-white">Search Memories</h3>
@@ -92,6 +91,9 @@ const Home = () => {
           )}
 
           <Form currentId={currentId} setCurrentId={setCurrentId} />
+        </div>
+        <div className="col-lg-8">
+          <Posts setCurrentId={setCurrentId} />
         </div>
       </div>
     </div>

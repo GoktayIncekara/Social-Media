@@ -7,13 +7,20 @@ import moment from "moment";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { deletePost, likePost } from "../../../actions/posts";
+import { deletePost, likePost, getPosts } from "../../../actions/posts";
 
 const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("profile"));
   const [likes, setLikes] = useState(post?.likes);
+
+  /*
+   <h1>USER ID</h1>
+   <h1>{user?.userObject._id}</h1>
+   <h1>POST ID</h1>
+   <h1>{post?.creator}</h1>
+  */
 
   const userId = user?.userObject._id;
   const hasLikedPost = post.likes.find((like) => like === userId);
@@ -30,6 +37,11 @@ const Post = ({ post, setCurrentId }) => {
 
   const openPost = () => {
     navigate(`/posts/${post._id}`);
+  };
+
+  const handleDelete = () => {
+    dispatch(deletePost(post._id));
+    dispatch(getPosts(1));
   };
 
   const Likes = () => {
@@ -96,10 +108,6 @@ const Post = ({ post, setCurrentId }) => {
           <h6 className="card-subtitle mb-2 text-muted">
             {post.tags.map((tag) => `#${tag} `)}
           </h6>
-          <h1>USER ID</h1>
-          <h1>{user?.userObject._id}</h1>
-          <h1>POST ID</h1>
-          <h1>{post?.creator}</h1>
           <h5>{post.title}</h5>
           <p className="card-text mb-2">{post.message}</p>
         </div>
@@ -112,12 +120,7 @@ const Post = ({ post, setCurrentId }) => {
           <Likes />
         </button>
         {user?.userObject?._id === post?.creator && (
-          <button
-            className="btn btn-dark mx-2"
-            onClick={() => {
-              dispatch(deletePost(post._id));
-            }}
-          >
+          <button className="btn btn-dark mx-2" onClick={handleDelete}>
             <DeleteIcon fontSize="small" /> &nbsp; Delete &nbsp;
           </button>
         )}

@@ -17,7 +17,7 @@ const CommentSection = ({ post }) => {
 
   return (
     <div>
-      <div className="row mx-5 mt-3 d-flex justify-content-between">
+      <div className="row mx-5 mt-3 d-flex justify-content-around">
         {user?.userObject.name && (
           <div>
             <h1>Write a comment</h1>
@@ -38,7 +38,7 @@ const CommentSection = ({ post }) => {
             >
               Make a comment
             </button>
-            <h1 className="mb-3 text-dark">
+            <h1 className="mb-3 text-dark text-center">
               {comments.length ? "Comments" : ""}
             </h1>
           </div>
@@ -46,7 +46,7 @@ const CommentSection = ({ post }) => {
         {comments.map((com, index) => (
           <div
             key={index}
-            className="col-2 mb-3 mx-2 bg-secondary text-white rounded"
+            className="col-md-4 col-lg-2 mb-3 mx-2 bg-secondary text-white rounded"
           >
             <h3 className="mt-3">{com.split(": ")[0]}</h3>
             <hr />

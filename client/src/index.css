@@ -2,6 +2,10 @@ body {
     background-color: #eaeaea;
 }
 
+html, body {
+    overflow-x:hidden;
+}
+
 .card-img-top {
     width: 100%;
     height: 25vh;

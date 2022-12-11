@@ -33,9 +33,9 @@ const Navbar = () => {
   }, [location]);
 
   return (
-    <nav className="navbar navbar-light bg-light mb-4 py-4">
+    <nav className="navbar navbar-light bg-light mb-3 py-4">
       <div className="container-fluid">
-        <div className="col-9">
+        <div className="col-lg-9 mb-4">
           <a className="navbar-brand h1 mx-4" href="/">
             <img src={memoriesText} width="200" height="50" alt="Logo"></img>
             <img
@@ -48,26 +48,28 @@ const Navbar = () => {
           </a>
         </div>
         {user ? (
-          <div className="col-3 d-flex justify-content-end">
-            {user.userObject.picture ? (
-              <div className="mx-2 align-self-center">
-                <img
-                  alt={user?.userObject.name}
-                  src={user?.userObject.picture}
-                ></img>
-              </div>
-            ) : (
-              <div className="mx-2 align-self-center">
-                <h1>{user?.userObject.name.charAt(0)}</h1>
-              </div>
-            )}
-            <h6 className="mx-2 align-self-center mb-0">
-              {" "}
-              {user?.userObject.name}{" "}
-            </h6>
-            <button className="btn btn-dark mx-4" onClick={logout}>
-              Logout
-            </button>
+          <div className="col-lg-3 ">
+            <div className="d-flex justify-content-md-end justify-content-xs-center">
+              {user.userObject.picture ? (
+                <div className="mx-2 align-self-center">
+                  <img
+                    alt={user?.userObject.name}
+                    src={user?.userObject.picture}
+                  ></img>
+                </div>
+              ) : (
+                <div className="mx-2 align-self-center">
+                  <h1>{user?.userObject.name.charAt(0)}</h1>
+                </div>
+              )}
+              <h6 className="mx-2 align-self-center mb-0">
+                {" "}
+                {user?.userObject.name}{" "}
+              </h6>
+              <button className="btn btn-dark mx-4" onClick={logout}>
+                Logout
+              </button>
+            </div>
           </div>
         ) : (
           <div>

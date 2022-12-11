@@ -15,7 +15,7 @@ const Posts = ({ setCurrentId }) => {
     <div className="container">
       <div className="row">
         {posts.map((post) => (
-          <div className="col-4 mb-3" key={post._id}>
+          <div className="col-md-6 col-lg-4 mb-3" key={post._id}>
             <Post post={post} setCurrentId={setCurrentId} />
           </div>
         ))}

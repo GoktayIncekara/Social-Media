@@ -85,11 +85,9 @@ const Auth = () => {
   };
 
   return (
-    <div className="row">
-      <div className="col-4"></div>
-
-      <div className="col-4">
-        <form className="bg-white p-4" onSubmit={handleSubmit}>
+    <div className="row d-flex justify-content-center">
+      <div className="col-lg-6">
+        <form className="bg-white p-4 mx-3" onSubmit={handleSubmit}>
           <div className="row">
             <div className="col-12 d-flex justify-content-center mb-1">
               <LockOutlinedIcon />
@@ -106,7 +104,7 @@ const Auth = () => {
                     <input
                       type="text"
                       name="firstName"
-                      className="form-control mb-3"
+                      className="form-control mb-3 form-control-lg"
                       placeholder="First Name"
                       onChange={handleChange}
                       autoFocus
@@ -114,7 +112,7 @@ const Auth = () => {
                     <input
                       type="text"
                       name="lastName"
-                      className="form-control"
+                      className="form-control form-control-lg"
                       placeholder="Last Name"
                       onChange={handleChange}
                     />
@@ -127,7 +125,7 @@ const Auth = () => {
                 <input
                   name="email"
                   type="email"
-                  className="form-control"
+                  className="form-control form-control-lg"
                   placeholder="Email"
                   onChange={handleChange}
                 />
@@ -137,7 +135,7 @@ const Auth = () => {
               <div className="form-group">
                 <input
                   name="password"
-                  className="form-control"
+                  className="form-control form-control-lg"
                   placeholder="Password"
                   onChange={handleChange}
                   type={showPassword ? "text" : "password"}
@@ -149,7 +147,7 @@ const Auth = () => {
                 {isSignup && (
                   <input
                     name="confirmPassword"
-                    className="form-control"
+                    className="form-control form-control-lg"
                     placeholder="Confirm Password"
                     onChange={handleChange}
                     type={showPassword ? "text" : "password"}
@@ -165,7 +163,7 @@ const Auth = () => {
               />
               <label className="form-check-label">Show Password</label>
             </div>
-            <button type="submit" className="btn btn-dark mb-3">
+            <button type="submit" className="btn btn-dark mb-3  btn-lg">
               {isSignup ? "Sign Up" : "Sign In"}
             </button>
             <div>
@@ -173,7 +171,7 @@ const Auth = () => {
             </div>
             <button
               type="button"
-              className="btn btn-danger mb-3"
+              className="btn btn-danger mb-3 btn-lg"
               onClick={switchMode}
             >
               {isSignup
@@ -184,8 +182,6 @@ const Auth = () => {
           </div>
         </form>
       </div>
-
-      <div className="col-4"></div>
     </div>
   );
 };

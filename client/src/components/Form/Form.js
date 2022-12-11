@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
 import { useDispatch } from "react-redux";
-import { createPost, updatePost } from "../../actions/posts";
+import { createPost, updatePost, getPosts } from "../../actions/posts";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -32,10 +32,13 @@ const Form = ({ currentId, setCurrentId }) => {
 
     if (currentId) {
       dispatch(
-        updatePost(currentId, { ...postData, name: user?.userObject?.name })
+        updatePost(
+          currentId,
+          { ...postData, name: user?.userObject?.name },
+          navigate
+        )
       );
     } else {
-      console.log(postData);
       dispatch(
         createPost({ ...postData, name: user?.userObject?.name }, navigate)
       );
@@ -71,7 +74,7 @@ const Form = ({ currentId, setCurrentId }) => {
   }
 
   return (
-    <div className="bg-secondary p-3 pb-1 mt-3">
+    <div className="bg-secondary p-3 pb-1 mt-3 mb-3">
       <form autoComplete="off" noValidate onSubmit={handleSubmit}>
         <div className="row">
           <div className="col-12">

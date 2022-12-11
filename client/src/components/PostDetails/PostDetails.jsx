@@ -37,14 +37,14 @@ const PostDetails = () => {
     <div>
       <div className="card shadow bg-body rounded mx-5 mb-5">
         <div className="row">
-          <div className="col-4">
+          <div className="col-lg-4">
             <img
               className="img-fluid rounded-start"
               src={post.selectedFile}
               alt="Post"
             ></img>
           </div>
-          <div className="col-8  d-flex align-items-center">
+          <div className="col-lg-8  d-flex align-items-center">
             <div className="card-body">
               <h6 className="card-subtitle mb-2 text-muted">
                 {post.tags.map((tag) => `#${tag} `)}
@@ -69,7 +69,7 @@ const PostDetails = () => {
           <div className="row px-2 d-flex justify-content-center">
             {recommendedPosts.map(
               ({ title, message, name, likes, selectedFile, _id }) => (
-                <div className="col-3 m-3" key={_id}>
+                <div className="col-lg-3 m-3" key={_id}>
                   <div
                     className="card shadow bg-body rounded"
                     onClick={() => openPost(_id)}
