@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
 import { useDispatch } from "react-redux";
-import { createPost, updatePost, getPosts } from "../../actions/posts";
+import { createPost, updatePost } from "../../actions/posts";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 

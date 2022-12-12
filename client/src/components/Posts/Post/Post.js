@@ -15,14 +15,7 @@ const Post = ({ post, setCurrentId }) => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const [likes, setLikes] = useState(post?.likes);
 
-  /*
-   <h1>USER ID</h1>
-   <h1>{user?.userObject._id}</h1>
-   <h1>POST ID</h1>
-   <h1>{post?.creator}</h1>
-  */
-
-  const userId = user?.userObject._id;
+  const userId = user?.userObject._id || user?.userObject.sub;
   const hasLikedPost = post.likes.find((like) => like === userId);
 
   const handleLike = async () => {
@@ -89,7 +82,7 @@ const Post = ({ post, setCurrentId }) => {
           </p>
         </div>
         <div>
-          {user?.userObject?._id === post?.creator && (
+          {userId === post?.creator && (
             <button
               type="button"
               className="btn btn-dark"
@@ -119,7 +112,7 @@ const Post = ({ post, setCurrentId }) => {
         >
           <Likes />
         </button>
-        {user?.userObject?._id === post?.creator && (
+        {userId === post?.creator && (
           <button className="btn btn-dark mx-2" onClick={handleDelete}>
             <DeleteIcon fontSize="small" /> &nbsp; Delete &nbsp;
           </button>

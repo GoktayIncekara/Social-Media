@@ -10,10 +10,8 @@ const Auth = () => {
   const navigate = useNavigate();
 
   function handleCallbackResponse(response) {
-    //console.log("Encoded JWT ID token: " + response.credential);
     var token = response.credential;
     var userObject = jwt_decode(response.credential);
-    //userObject = { ...userObject, _id: "123456" };
 
     document.getElementById("signInDiv").hidden = true;
 
@@ -104,7 +102,7 @@ const Auth = () => {
                     <input
                       type="text"
                       name="firstName"
-                      className="form-control mb-3 form-control-lg"
+                      className="form-control mb-3"
                       placeholder="First Name"
                       onChange={handleChange}
                       autoFocus
@@ -112,7 +110,7 @@ const Auth = () => {
                     <input
                       type="text"
                       name="lastName"
-                      className="form-control form-control-lg"
+                      className="form-control"
                       placeholder="Last Name"
                       onChange={handleChange}
                     />
@@ -125,7 +123,7 @@ const Auth = () => {
                 <input
                   name="email"
                   type="email"
-                  className="form-control form-control-lg"
+                  className="form-control"
                   placeholder="Email"
                   onChange={handleChange}
                 />
@@ -135,7 +133,7 @@ const Auth = () => {
               <div className="form-group">
                 <input
                   name="password"
-                  className="form-control form-control-lg"
+                  className="form-control"
                   placeholder="Password"
                   onChange={handleChange}
                   type={showPassword ? "text" : "password"}
@@ -147,7 +145,7 @@ const Auth = () => {
                 {isSignup && (
                   <input
                     name="confirmPassword"
-                    className="form-control form-control-lg"
+                    className="form-control"
                     placeholder="Confirm Password"
                     onChange={handleChange}
                     type={showPassword ? "text" : "password"}
@@ -163,7 +161,7 @@ const Auth = () => {
               />
               <label className="form-check-label">Show Password</label>
             </div>
-            <button type="submit" className="btn btn-dark mb-3  btn-lg">
+            <button type="submit" className="btn btn-dark mb-3">
               {isSignup ? "Sign Up" : "Sign In"}
             </button>
             <div>
@@ -171,7 +169,7 @@ const Auth = () => {
             </div>
             <button
               type="button"
-              className="btn btn-danger mb-3 btn-lg"
+              className="btn btn-danger mb-3"
               onClick={switchMode}
             >
               {isSignup
