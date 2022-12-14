@@ -3,15 +3,14 @@ import { useDispatch } from "react-redux";
 import { commentPost } from "../../actions/posts";
 
 const CommentSection = ({ post }) => {
-  const [comments, setComments] = useState(post?.comments);
+  let comments = post?.comments;
   const [comment, setComment] = useState("");
   const user = JSON.parse(localStorage.getItem("profile"));
   const dispatch = useDispatch();
 
   const handleClick = async () => {
     const finalComment = `${user.userObject.name}: ${comment}`;
-    const newComments = await dispatch(commentPost(finalComment, post._id));
-    setComments(newComments);
+    dispatch(commentPost(finalComment, post._id));
     setComment("");
   };
 
