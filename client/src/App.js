@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 const App = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
+
   return (
     <BrowserRouter>
       <div>

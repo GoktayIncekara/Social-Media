@@ -4,10 +4,13 @@ import jwt_decode from "jwt-decode";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { signin, signup } from "../../actions/auth";
+import { useSelector } from "react-redux";
+import loadScript from "../../helpers/ScriptLoader";
 
 const Auth = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { scriptLoaded } = useSelector((state) => state.load);
+  const dispatch = useDispatch();
 
   function handleCallbackResponse(response) {
     var token = response.credential;
@@ -22,6 +25,7 @@ const Auth = () => {
       console.log(error);
     }
   }
+
   /*
   function handleSignOut(event) {
     document.getElementById("signInDiv").hidden = false;
@@ -29,17 +33,21 @@ const Auth = () => {
   */
 
   useEffect(() => {
-    /* global google */
-    google.accounts.id.initialize({
-      client_id:
-        "792913670363-i5g3ieh6kfovjobbtuqbqttvoalstkat.apps.googleusercontent.com",
-      callback: handleCallbackResponse,
-    });
-    google.accounts.id.renderButton(document.getElementById("signInDiv"), {
-      theme: "outline",
-      size: "large",
-    });
-  }, []);
+    loadScript("https://accounts.google.com/gsi/client", dispatch);
+
+    if (scriptLoaded) {
+      /* global google */
+      google.accounts.id.initialize({
+        client_id:
+          "792913670363-i5g3ieh6kfovjobbtuqbqttvoalstkat.apps.googleusercontent.com",
+        callback: handleCallbackResponse,
+      });
+      google.accounts.id.renderButton(document.getElementById("signInDiv"), {
+        theme: "outline",
+        size: "large",
+      });
+    }
+  }, [scriptLoaded]);
 
   const initialState = {
     firstName: "",
